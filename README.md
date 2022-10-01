@@ -366,7 +366,7 @@ python generate_script.py transcriptome \
 --input_summary ~/REDD_data/sequencing_summary_FAP47598_07e34f33.txt \
 --ref_genome ~/REDD_data/genome.fa \
 --ref_transcriptome ~/REDD_data/Stem_cell_talon.flt.bam_flt.gtf.fa \
---device 'GPU' \
+--device 'CPU' \
 --ref_annotation ~/REDD_data/Stem_cell_talon.flt.bam_flt.gpd
 ```
 ```
