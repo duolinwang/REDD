@@ -315,11 +315,10 @@ bash run.pbs
 ```
 ## Examples
 
-### Download the test data and references from our server to a working folder 
-'''
-mkdir ~/REDD
-cd ~/REDD
-'''
+**Download the test data and references from our server to a working folder**
+```
+mkdir ~/REDD_data && cd ~/REDD_data
+```
 **Download required test data**: 3959 reads randomly selected from stem cell H1-DE after basecalling
 ```
 #Fast5 files:
@@ -357,31 +356,34 @@ wget https://reddexamples.s3.us-east-2.amazonaws.com/DE-H1_directRNA.candidate_s
 ```
 ### Example tasks:
 ```
+cd ~/REDD
 python generate_script.py transcriptome \
 --pipeline_mode 'bash' \
 --output_name H1-DE_sample_trans \
---output_path /fs/ess/scratch/PCON0009/duolin/REDD-pipeline/REDD-results/H1-DE_sample \
---input_fastq /fs/ess/scratch/PCON0009/duolin/REDD-pipeline/REDDdata/H1-DE_sample/fastq_pass \
---input_fast5 /fs/ess/scratch/PCON0009/duolin/REDD-pipeline/REDDdata/H1-DE_sample/fast5_pass \
---input_summary /fs/project/PCON0009/LabData/Human/DE-H1/Transcriptome/ONT/directRNA/20210330_2124_X2_FAP47598_1c046625/sequencing_summary_FAP47598_07e34f33.txt \
---ref_genome /fs/project/PCON0009/Au-scratch2/ying/StemCell/ref/genome.fa \
---ref_transcriptome /fs/project/PCON0009/Au-scratch2/ying/StemCell/RNAdirect/reditools2/2-curate_gtf/Stem_cell_talon.flt.bam_flt.gtf.fa \
+--output_path ~/REDD-results/ \
+--input_fastq ~/REDD_data/fastq_pass \
+--input_fast5 ~/REDD_data/fast5_pass \
+--input_summary ~/REDD_data/sequencing_summary_FAP47598_07e34f33.txt \
+--ref_genome ~/REDD_data/genome.fa \
+--ref_transcriptome /~/REDD_data/Stem_cell_talon.flt.bam_flt.gtf.fa \
 --device 'GPU' \
---ref_annotation /fs/project/PCON0009/Au-scratch2/ying/StemCell/RNAdirect/reditools2/2-curate_gtf/Stem_cell_talon.flt.bam_flt.gpd \
-
+--ref_annotation ~/REDD_data/Stem_cell_talon.flt.bam_flt.gpd \
+```
+```
+cd ~/REDD
 python generate_script.py genome \
 --pipeline_mode 'bash' \
 --output_name H1-DE_sample_genome \
---output_path /fs/ess/scratch/PCON0009/duolin/REDD-pipeline/REDD-results/H1-DE_sample \
---input_fastq /fs/ess/scratch/PCON0009/duolin/REDD-pipeline/REDDdata/H1-DE_sample/fastq_pass \
---input_fast5 /fs/ess/scratch/PCON0009/duolin/REDD-pipeline/REDDdata/H1-DE_sample/fast5_pass \
---input_summary /fs/project/PCON0009/LabData/Human/DE-H1/Transcriptome/ONT/directRNA/20210330_2124_X2_FAP47598_1c046625/sequencing_summary_FAP47598_07e34f33.txt \
---ref_genome /fs/project/PCON0009/Au-scratch2/ying/StemCell/ref/genome.fa \
+--output_path ~/REDD-results/ \
+--input_fastq ~/REDD_data/fastq_pass \
+--input_fast5 ~/REDD_data/fast5_pass \
+--input_summary ~/REDD_data/sequencing_summary_FAP47598_07e34f33.txt \
+--ref_genome ~/REDD_data/genome.fa \
 --device 'CPU' \
---ref_alu /fs/project/PCON0009/Au-scratch2/ying/StemCell/RNAdirect/reditools2/test/Hg38_Alu.merge.bed \
---ref_snp /fs/project/PCON0009/Au-scratch2/ying/StemCell/RNAdirect/reditools2/test/hg38_snp151.bed \
---ref_REDIportal /fs/project/PCON0009/Au-scratch2/ying/StemCell/RNAdirect/reditools2/test/REDIportal_hg38.txt 
-
+--ref_alu ~/REDD_data/Hg38_Alu.merge.bed \
+--ref_snp ~/REDD_data/hg38_snp151.bed \
+--ref_REDIportal ~/REDD_data/REDIportal_hg38.txt 
+```
 
 ## Possible issues and solutions (to be continue)
 Each time of running, REDD pipline will generate a **run.pbs**, and a **config.yaml** in the {output_path} and a **log** file in **{output_path}/REDD_logs/REDD_{output_name}.log**. You can refere to the **run.pbs**, **config.yaml** and the **log** file for details of the commands,parameters and running status.
@@ -401,6 +403,6 @@ If you use any part of this code in your work, please cite our
 
 ### License
 This software is released under the MIT license. For more details, please refer
-[LICENSE.txt](https://github.com/duolinwang/REDD/LICENSE.txt).
+[LICENSE.txt](https://github.com/Tidesun/REDD/LICENSE.txt).
 
 For questions, please email wangdu@missouri.edu.
