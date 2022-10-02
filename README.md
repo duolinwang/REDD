@@ -33,7 +33,7 @@ conda activate REDD
 
 REDD pipeline is supported by Snakemake, refer to  [snakemake](https://snakemake.readthedocs.io/en/stable/).   for more information of Snakemake. (todo). The whole pipeline can be found in the snakefile under the REDD-main directory.
 We used script generate_script.py to generate the config.yaml file and shell file, run.pbs, for users to run REDD in a Slurm cluster or bash. You need to set parameter --pipeline_mode to either 'cluster' or 'bash'.
-REDD pepeline provides two ways for the mapping of reads: mapping to genome and transcriptome. You need to choose one at the begining. Mapping to the transcriptome has one additional step where the genome wide annotaions will be added to the site-level and molecule-level results, which requires a reference genome and reference annotation as well.
+REDD pepeline provides two ways for the mapping of reads: mapping to ***genome*** and ***transcriptome***. You need to choose one at the begining. Mapping to the transcriptome has one additional step where the genome wide annotaions will be added to the site-level and molecule-level results, which requires a reference genome and reference annotation as well.
 
 **Use genome as reference:**
 The results will be generated in the **{output_path}/outputs** folder. 
