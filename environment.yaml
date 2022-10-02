@@ -27,3 +27,4 @@ dependencies:
   - six=1.15.0
   - bioawk=1.0
   - perl=5.32.1
+  - gawk=5.1.0
