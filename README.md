@@ -387,6 +387,7 @@ python generate_script.py genome \
 
 ## Possible issues and solutions (to be continue)
 Each time of running, REDD pipline will generate a **run.pbs**, and a **config.yaml** in the {output_path} and a **log** file in **{output_path}/REDD_logs/REDD_{output_name}.log**. You can refere to the **run.pbs**, **config.yaml** and the **log** file for details of the commands,parameters and running status.
+For Slurm submit, you can modify the ***run.pbs*** according to your Slurm system's configuration.
 **Simply rerun the pipeline by sbatch run.pbs or bash run.pbs will solve the issue. The pipeline will continue from where it failed last time.** 
 If pipeline is stopped due to time limit for "cluster" mode, you can resubmit the job by "sbatch run.pbs".
 If pipeline is stopped due to memory issues, you can try resubmit the job first and then change the number of reads per task to a smaller value by "--num_reads".

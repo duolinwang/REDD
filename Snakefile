@@ -389,7 +389,6 @@ if config['reference'] == 'transcriptome':
         input:
             cdna_molecule_input="outputs/"+config['sample']+".prediction.txt",
             cdna2genome_tab="intermediates/reference/"+config['sample']+".gencode.v31.annotation.cdna2genome.tab",
-            annotation_gpd=config['ref_annotation_file'],
             cdna_site_tab="outputs/"+config['sample']+".flt.transcriptome.tab",
         output:
             mole="outputs/"+config['sample']+".prediction.transcriptome.txt",
@@ -398,7 +397,7 @@ if config['reference'] == 'transcriptome':
             runtime= 20
         threads: 6
         shell:
-            """sh scripts/cdna2genome.sh {input.cdna_molecule_input} {output.mole} {output.site_tab} {input.cdna2genome_tab} {input.annotation_gpd} {input.cdna_site_tab}"""
+            """sh scripts/cdna2genome.sh {input.cdna_molecule_input} {output.mole} {output.site_tab} {input.cdna2genome_tab} {input.cdna_site_tab}"""
 
 if config['reference'] == 'genome':
     rule pre_compute_visualization:

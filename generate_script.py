@@ -202,31 +202,24 @@ ref_snp_file: '{ref_snp_file}'
 ref_REDIportal_file: '{ref_REDIportal_file}'
 ref_candidate_sites_file: '{ref_candidate_sites_file}'
 '''
-    
+    if device=='GPU':
+       SBATCHline="#SBATCH --nodes=1 --ntasks-per-node=1 --gpus-per-node=1"
+    else:
+       SBATCHline="#SBATCH --nodes=1 --ntasks-per-node=1"
     script = f'''#!/bin/bash
 #SBATCH --time={overall_time}:00:00
-#SBATCH --nodes=1 --ntasks-per-node=1
+'''+f'''{SBATCHline}
+'''+f'''
 #SBATCH --account={account}
 
 activate REDD
-
 mkdir {output_folder}/intermediates
 mkdir {output_folder}/intermediates/fastq/
 mkdir {output_folder}/intermediates/fast5/
-#mkdir {output_folder}/intermediates/summary/
 mkdir {output_folder}/intermediates/reference/
-# link data
-#ln -s {input_fastq_folder} {output_folder}/intermediates/fastq/{output_name}
-#ln -s {input_fast5_folder} {output_folder}/intermediates/fast5/{output_name}
-#ln -s {input_summary_file} {output_folder}/intermediates/summary/{output_name}_summary.txt
 # link reference
 ln -s {ref_transcriptome_file} {output_folder}/intermediates/reference/{output_name}.transcriptome.fa
 ln -s {ref_genome_file} {output_folder}/intermediates/reference/{output_name}.genome.fa
-#ln -s {ref_annotation_file} {output_folder}/intermediates/reference/{output_name}.gencode.v31.annotation.gpd
-#ln -s {ref_alu_file} {output_folder}/intermediates/reference/{output_name}.Hg38_Alu.merge.bed
-#ln -s {ref_snp_file} {output_folder}/intermediates/reference/{output_name}.hg38_snp151.bed
-#ln -s {ref_REDIportal_file} {output_folder}/intermediates/reference/{output_name}.REDIportal_hg38.txt
-#ln -s {ref_candidate_sites_file} {output_folder}/intermediates/reference/{output_name}.candidate_sites.tab
 
 # link script
 ln -s {snakefile_path}/scripts scripts
@@ -254,9 +247,11 @@ snakemake -c {max_cores_resources} -p outputs/precomputed_visualization/{output_
     print("To run REDD pipeline:\n")
     print("cd "+output_folder+"\n")
     if pipeline_mode == 'cluster':
-          print(f'sbatch run.pbs\nsince you set the pipeline_mode to \'cluster\'. \n')
+          print(f'sbatch run.pbs\nsince you set the pipeline_mode to \'cluster\'.')
     elif pipeline_mode == "bash":
-            print(f'bash run.pbs\nsince you set the pipeline_mode to \'bash\'. \n')
+            print(f'bash run.pbs\nsince you set the pipeline_mode to \'bash\'.')
+    
+    print(f'Refer to log file in {output_folder}/REDD_logs/REDD_{output_name}.log for more information\n')
 
 main()
     
