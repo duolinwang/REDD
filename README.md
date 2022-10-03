@@ -387,13 +387,13 @@ python generate_script.py genome \
 ```
 
 ## Possible issues and solutions (to be continue)
-* After running generate_script.py, a **run.pbs**, and a **config.yaml** file will be generated in {output_path}. You can refer to run.pbs and config.yaml for details of the commands and configurations.
+* After run generate_script.py, a **run.pbs**, and a **config.yaml** file will be generated in {output_path}.You can refere to run.pbs and config.yaml for details of the commands and configurations.
 * For Slurm submission (--pipeline_mode='cluster') , you can modify **run.pbs** according to your cluster's system configuration.
-* Each time of running **run.pbs**, a **log** file and a **dag.pdf** will be generated in **{output_path}/REDD_logs/REDD_{output_name}.log** and **{output_path}**. You can refer to the log file for running status and dag.pdf for the rule dependencies at each step of the REDD. The tags in the dag.pdf file represent the rule names which can be found in the Snakefile.
-* **Simply rerun the pipeline by "sbatch run.pbs" or "bash run.pbs" usually solves most issues. The pipeline will continue from where it failed last time.** 
-* If pipeline is stopped due to time limit for "cluster" mode, you can resubmit the job by "sbatch run.pbs" to make it run for another {overall_time} or enlarge the {overall_time} parameter, since REDD can continue from where it stopped.
+* Each time of running **run.pbs**, a **log** file and a **dag.pdf** will be generated in **{output_path}/REDD_logs/REDD_{output_name}.log** and **{output_path}**. You can refere to the log file for running status and dag.pdf for the rule dependencies at each step of the REDD. The tags in the dag.pdf file represent the rule names which can be found in the Snakefile.
+* **Simply rerun the pipeline by sbatch run.pbs or bash run.pbs usually solves most issues. The pipeline will continue from where it failed last time.** 
+* If pipeline is stopped due to time limit for "cluster" mode, you can resubmit the job by "sbatch run.pbs" to make run for another {overall_time} or enlarge the {overall_time} parameter
 * If pipeline is stopped due to memory issues, you can try resubmit the job or reduce the number of reads per task by {num_reads} parameter.
-* If you want to change some parameters and rerun the pipline from where the parameter effective, you should change the parameters in the config.yaml file manualy and remove the results in the "ouputs" folder or "intermediates" folder from where the parameter effective and rerun run.pbs again. The name of output files can be found in the Snakemake file and you can refer to the rule dependencies presented in the dag.pdf for the output dependencies.
+* If you want to change some parameters and rerun the pipline from where the parameter effective, you should change the parameters in the config.yaml file manualy and remove the results in the "ouputs" folder or "intermediates" folder from where the parameter effective and rerun run.pbs again. The relationship of output file can be found in the Snakemake file according to the rule dependencies presented in the dag.pdf.
 
 
 ### Acknowledgements

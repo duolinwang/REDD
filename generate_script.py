@@ -226,6 +226,8 @@ ln -s {snakefile_path}/scripts scripts
 cp {snakefile_path}/Snakefile Snakefile
 snakemake --unlock
 snakemake -p outputs/precomputed_visualization/{output_name} --rulegraph | dot -Tpdf > dag.pdf
+
+echo "Please refer to log file in {output_folder}/REDD_logs/REDD_{output_name}.log for more information."
 '''
 
     if pipeline_mode == 'cluster':
@@ -246,13 +248,12 @@ snakemake -c {max_cores_resources} -p outputs/precomputed_visualization/{output_
     
     print(f'run_{output_name}.pbs and your current configuaration config.yaml have been generated in {output_folder}')
     print("To run REDD pipeline:\n")
-    print("cd "+output_folder+"\n")
+    print("cd "+output_folder)
     if pipeline_mode == 'cluster':
-          print(f'sbatch run.pbs\nsince you set the pipeline_mode to \'cluster\'.')
+          print(f'sbatch run.pbs\n\nsince you set the pipeline_mode to \'cluster\'.')
     elif pipeline_mode == "bash":
-            print(f'bash run.pbs\nsince you set the pipeline_mode to \'bash\'.')
+            print(f'bash run.pbs\n\nsince you set the pipeline_mode to \'bash\'.')
     
-    print(f'Refer to log file in {output_folder}/REDD_logs/REDD_{output_name}.log for more information\n')
 
 main()
     
