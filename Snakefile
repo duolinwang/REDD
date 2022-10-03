@@ -1,9 +1,9 @@
 scattergather:
     split=8
+
 num_split = workflow._scatter['split']
 configfile: "config.yaml"
-print('Current configuration:')
-print(config)
+
 rule merge_fastq:
     input:
         #"intermediates/fastq/{sample}/"
