@@ -225,6 +225,7 @@ ln -s {ref_genome_file} {output_folder}/intermediates/reference/{output_name}.ge
 ln -s {snakefile_path}/scripts scripts
 cp {snakefile_path}/Snakefile Snakefile
 snakemake --unlock
+snakemake -p outputs/precomputed_visualization/{output_name} --rulegraph | dot -Tpdf > dag.pdf
 '''
 
     if pipeline_mode == 'cluster':
